@@ -1,0 +1,73 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:7.0
+    container_name: reposensei-mongodb
+    volumes:
+      - mongo-data:/data/db
+    ports:
+      - '27017:27017'
+    environment:
+      MONGO_INITDB_DATABASE: reposensei
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./reposensei-frontend
+    container_name: reposensei-frontend
+    ports:
+      - '5173:80'
+    secrets:
+      - supabase_url
+      - supabase_anon_key
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+  backend:
+    build: ./reposensei-backend
+    container_name: reposensei-backend
+    ports:
+      - '3000:3000'
+    environment:
+      - MONGODB_URI=mongodb://mongodb:27017/reposensei
+      - SUPABASE_URL_FILE=/run/secrets/supabase_url
+      - SUPABASE_SERVICE_ROLE_KEY_FILE=/run/secrets/supabase_service_role_key
+      - PYTHON_BACKEND_URL=http://python-backend:5005
+    secrets:
+      - supabase_url
+      - supabase_service_role_key
+      - github_token
+    depends_on:
+      - mongodb
+      - python-backend
+    restart: unless-stopped
+
+  python-backend:
+    build: ./reposensei-python-backend
+    container_name: reposensei-python-backend
+    ports:
+      - '5005:5005'
+    environment:
+      - SUPABASE_URL_FILE=/run/secrets/supabase_url
+      - GITHUB_TOKEN_FILE=/run/secrets/github_token
+    secrets:
+      - supabase_url
+      - github_token
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+volumes:
+  mongo-data:
+
+secrets:
+  supabase_url:
+    file: ./secrets/supabase_url.txt
+  supabase_anon_key:
+    file: ./secrets/supabase_anon_key.txt
+  supabase_service_role_key:
+    file: ./secrets/supabase_service_role_key.txt
+  github_token:
+    file: ./secrets/github_token.txt
