@@ -55,8 +55,6 @@ services:
     secrets:
       - supabase_url
       - github_token
-    depends_on:
-      - backend
     restart: unless-stopped
 
 volumes:
