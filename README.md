@@ -1,185 +1,125 @@
-# RepoSensei - AI-Powered Repository Analysis 🚀
+# RepoSensei
 
-A complete AI-powered repository analysis tool with secure Docker containerization, local MongoDB, and cloud Supabase integration.
+A comprehensive repository analysis and developer productivity platform.
 
-## 🏆 Hackathon Features
-
-- **🔐 Enterprise-Grade Security** - Docker secrets with runtime injection
-- **🐳 Full Containerization** - No global dependencies required
-- **🤖 AI-Powered Analysis** - Code review, architecture mapping, technical debt detection
-- **📊 Real-time Insights** - Live repository analysis and visualization
-- **👥 Team Collaboration** - Shared database with individual access tokens
-
-## 🎯 Quick Start (5 minutes)
+## Quick Start with Docker
 
 ### Prerequisites
-- Docker Desktop
-- Git
+- Docker and Docker Compose installed
+- Supabase account and project
+- GitHub personal access token
 
 ### Setup
-```bash
-# 1. Clone the repository
-git clone https://github.com/repo-sensei/infra.git
-cd infra
 
-# 2. Setup secrets (interactive)
-chmod +x setup-secrets.sh
-./setup-secrets.sh
+1. **Clone the repository**
+   ```bash
+   git clone <your-repo-url>
+   cd reposensei
+   ```
 
-# 3. Launch everything
-docker-compose up --build
-```
+2. **Create environment file**
+   ```bash
+   cp env.example .env
+   ```
+   
+   Edit `.env` and add your actual values:
+   ```
+   SUPABASE_URL=https://your-project.supabase.co
+   SUPABASE_ANON_KEY=your_anon_key
+   SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
+   GITHUB_TOKEN=your_github_token
+   ```
 
-### Access Your Application
-- 🌐 **Frontend**: http://localhost:5173
-- 🔧 **Backend API**: http://localhost:3000
-- 🐍 **Python Backend**: http://localhost:5005
-- 🗄️ **MongoDB**: localhost:27017
+3. **Start the application**
+   ```bash
+   # On Linux/Mac:
+   ./start.sh
+   
+   # On Windows:
+   docker-compose up --build -d
+   ```
 
-## 🏗️ Architecture
+4. **Access the application**
+   - Frontend: http://localhost:5173
+   - Backend API: http://localhost:3000
+   - Python Backend: http://localhost:5005
 
-```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   Frontend      │    │   Backend       │    │  Python Backend │
-│   (React/Vite)  │◄──►│   (Node.js)     │◄──►│   (FastAPI)     │
-│   Port: 5173    │    │   Port: 3000    │    │   Port: 5005    │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-                                │
-                                ▼
-                       ┌─────────────────┐
-                       │   MongoDB       │
-                       │   (Local)       │
-                       │   Port: 27017   │
-                       └─────────────────┘
-                                │
-                                ▼
-                       ┌─────────────────┐
-                       │   Supabase      │
-                       │   (Shared)      │
-                       │   (Cloud)       │
-                       └─────────────────┘
-```
+### Services
 
-## 🔐 Security Implementation
+- **Frontend**: React/Vite application served by Nginx
+- **Backend**: Node.js Express API
+- **Python Backend**: FastAPI service for AI/ML features
+- **MongoDB**: Database for storing repository data
 
-### **Docker Secrets Architecture**
-- **Runtime Injection** - No secrets baked into Docker images
-- **Frontend Placeholders** - Built JS contains only placeholders, replaced at runtime
-- **Restricted Permissions** - Secret files with 600 permissions
-- **Complete Separation** - Build-time (public) vs Runtime (private)
-
-### **Secret Management**
-```
-secrets/
-├── supabase_url.txt              # Supabase project URL
-├── supabase_anon_key.txt         # Frontend access key
-├── supabase_service_role_key.txt # Backend admin key
-└── github_token.txt              # GitHub personal token
-```
-
-## 📊 Features
-
-### **Repository Analysis**
-- 🔍 **AI-Powered Code Review** - Automated code quality assessment
-- 📊 **Architecture Graph** - Visual dependency mapping
-- 🎯 **Hotspot Detection** - Technical debt identification
-- 📈 **Commit History** - Code evolution tracking
-- 🏗️ **Complexity Analysis** - Cyclomatic complexity metrics
-
-### **AI Features**
-- 🤖 **Code Summarization** - Understand complex codebases
-- 🔧 **Refactoring Suggestions** - AI-powered improvements
-- 📝 **Documentation Generation** - Auto-generate technical docs
-- 🎨 **Personal Branding** - Create developer portfolio
-- 🧠 **Smart Recommendations** - Context-aware suggestions
-
-## 🐳 Docker Services
-
-| Service | Technology | Port | Purpose |
-|---------|------------|------|---------|
-| Frontend | React/Vite + Nginx | 5173 | User interface |
-| Backend | Node.js/Express | 3000 | API server |
-| Python Backend | FastAPI | 5005 | AI/ML services |
-| MongoDB | MongoDB 7.0 | 27017 | Local database |
-
-## 🔑 Required API Keys
-
-### **Supabase Keys (Get from Team Lead)**
-- **Project URL** - Your Supabase project URL
-- **Anon Key** - Frontend access key
-- **Service Role Key** - Backend admin key
-
-### **GitHub Token (Create Your Own)**
-1. Go to https://github.com/settings/tokens
-2. Click "Generate new token (classic)"
-3. Select scopes: `repo`, `read:user`, `user:email`
-
-## 🛠️ Development Commands
+### Useful Commands
 
 ```bash
 # View logs
-docker-compose logs
+docker-compose logs -f
 
-# Restart services
-docker-compose restart
-
-# Stop everything
+# Stop services
 docker-compose down
 
-# Rebuild after changes
-docker-compose up --build
+# Rebuild and restart
+docker-compose up --build -d
 
-# Access MongoDB
-docker exec -it reposensei-mongodb mongosh
+# View running containers
+docker-compose ps
 ```
 
-## 🚨 Security Notes
+## Development
 
-### **For Team Lead**
-- **Distribute Supabase keys securely** - DM, email, password manager
-- **Monitor Supabase usage** - All users share your database
-- **Set up rate limiting** - Prevent abuse of your keys
+For local development without Docker, see individual service READMEs in their respective directories.
 
-### **For Developers**
-- **Create own GitHub token** - Don't use someone else's
-- **Keep secret files secure** - Don't commit to git
-- **Contact team lead for Supabase keys** - Don't create your own
+## 🐳 Running with Docker
 
-## 🏆 Why This Setup is Perfect for Hackathons
+This project is fully containerized for a seamless, dependency-free setup. All services are orchestrated via Docker Compose, with strict versioning and secure secret management.
 
-### **✅ Professional Grade**
-- **Enterprise security** - Docker secrets with runtime injection
-- **Production-ready** - Scalable microservices architecture
-- **Clean code** - Minimal, maintainable Docker setup
+### **Project-Specific Docker Requirements**
+- **Node.js Version:** 22.13.1 (for all Node-based services)
+- **Python Version:** 3.11 (for Python backend)
+- **MongoDB:** 7.0 (official image)
+- **Nginx:** Alpine (for frontend static serving)
 
-### **✅ Developer Friendly**
-- **5-minute setup** - No complex configuration
-- **No global installs** - Everything containerized
-- **Cross-platform** - Works on Windows, Mac, Linux
+### **Required Environment Variables & Secrets**
+- Each service loads its environment variables from its respective `.env` file (see `env_file` in `docker-compose.yml`).
+- **Secrets** (required for full functionality):
+  - Place the following files in the `secrets/` directory:
+    - `supabase_url.txt`
+    - `supabase_anon_key.txt`
+    - `supabase_service_role_key.txt`
+    - `github_token.txt`
+- Use the provided `setup-secrets.sh` script to generate and configure secrets interactively.
 
-### **✅ Team Collaboration**
-- **Shared database** - Real-time collaboration
-- **Individual tokens** - Personal GitHub access
-- **Secure sharing** - No exposed credentials
+### **Build & Run Instructions**
+```bash
+# 1. Clone the repository and enter the directory
+# 2. Set up secrets (interactive)
+chmod +x setup-secrets.sh
+./setup-secrets.sh
 
-### **✅ Judging Ready**
-- **Complete documentation** - Professional README
-- **Clean repository** - No sensitive files committed
-- **Working demo** - Ready to present immediately
+# 3. Build and start all services
+# (Rebuilds images and starts containers)
+docker-compose up --build
+```
 
-## 📞 Support
+### **Service Ports**
+| Service                              | Port(s)   | Description                |
+|--------------------------------------|-----------|----------------------------|
+| Frontend (React/Vite + Nginx)        | 5173      | User interface             |
+| Backend (Node.js/Express)            | 3000      | API server                 |
+| Python Backend (FastAPI)             | 5005      | AI/ML services             |
+| MongoDB                              | 27017     | Local database             |
+| AI Pair Programming Backend (Node.js) | 3001,3002 | AI pair programming APIs   |
+| AI Pair Programming Frontend (Vite)  | 4173      | AI pair programming UI     |
 
-### **For Users**
-1. Check logs: `docker-compose logs`
-2. Verify secrets: `ls -la secrets/`
-3. Contact team lead for Supabase keys
-4. Create own GitHub token
+### **Special Configuration**
+- **Secrets are injected at runtime**—never baked into images.
+- **Frontend containers** use runtime secret injection to replace placeholders in built JS files.
+- **All containers run as non-root users** for enhanced security.
+- **Persistent MongoDB data** is stored in a Docker volume (`mongodb_data`).
+- **All services are networked via the `appnet` bridge** for secure internal communication.
 
-### **For Team Lead**
-- Monitor Supabase dashboard
-- Provide keys via secure channels
-- Support team during hackathon
+> **Note:** For local development, no global Node.js, Python, or MongoDB installation is required. All dependencies are managed within containers.
 
 ---
-
-**Built with ❤️ for hackathon success! 🚀** 
