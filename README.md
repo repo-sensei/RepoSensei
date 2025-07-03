@@ -1,125 +1,123 @@
-# RepoSensei
+# 🧠 RepoSensei — AI-Powered Codebase Intelligence
 
-A comprehensive repository analysis and developer productivity platform.
+**RepoSensei** is an AI-powered platform designed to streamline the **understanding**, **maintenance**, and **collaboration** of modern codebases. It accelerates developer onboarding, uncovers hidden technical debt, and empowers teams with real-time insights, role-based walkthroughs, and structured, context-aware task generation — all tailored to how you work.
 
-## Quick Start with Docker
+## 🧩 Key Features
 
-### Prerequisites
-- Docker and Docker Compose installed
-- Supabase account and project
-- GitHub personal access token
+### ✅ Repo Analysis & Navigation
+- Interactive **dependency mapping** and architecture visualization
+- Detection of technical hotspots and test coverage gaps
+- Commit history categorized by type and contributor
 
-### Setup
+### 🧭 Role-Based Onboarding
+- Auto-generated repo walkthroughs for frontend/backend developers
+- Tailored task lists based on role and codebase context
+- One-click onboarding for faster ramp-up
 
-1. **Clone the repository**
-   ```bash
-   git clone <your-repo-url>
-   cd reposensei
-   ```
+### 🕒 Recent Changes Panel
+- Auto-categorizes recent commits into **Features**, **Fixes**, **Refactors**, **Tests**, and **Docs**
+- Displays contributor, change description, and impacted files
+- Helps assess potential risks and streamline code reviews
 
-2. **Create environment file**
-   ```bash
-   cp env.example .env
-   ```
-   
-   Edit `.env` and add your actual values:
-   ```
-   SUPABASE_URL=https://your-project.supabase.co
-   SUPABASE_ANON_KEY=your_anon_key
-   SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
-   GITHUB_TOKEN=your_github_token
-   ```
+### 💡 Repository Architecture Diagram
+- Graph-based visualization of module structure, dependencies, and data flow
+- Powered by **Cytoscape.js** for real-time interaction
+- Ideal for understanding large or unfamiliar codebases
 
-3. **Start the application**
-   ```bash
-   # On Linux/Mac:
-   ./start.sh
-   
-   # On Windows:
-   docker-compose up --build -d
-   ```
+### 🔍 Code Quality Audits
+- Automated detection of TODOs, lint violations, and complexity issues
+- ESLint-powered file-level insights
+- AI-generated tasks with severity and location metadata
 
-4. **Access the application**
-   - Frontend: http://localhost:5173
-   - Backend API: http://localhost:3000
-   - Python Backend: http://localhost:5005
+### 🔥 Technical Debt Hotspots & Refactor Suggestions
+- Identifies and ranks the most debt-prone files
+- Highlights stale code, low-test areas, and unresolved TODOs
+- Generates AI-powered natural-language refactor suggestions using GPT-4o Mini
 
-### Services
+### 🤖 AI-Powered Development Tools
+- Converts vague goals and code changes into actionable development tasks
+- AI chatbot with repo-specific awareness for on-demand help
+- GPT-4o & Gemini Flash integration for summarization, pairing, and audits
 
-- **Frontend**: React/Vite application served by Nginx
-- **Backend**: Node.js Express API
-- **Python Backend**: FastAPI service for AI/ML features
-- **MongoDB**: Database for storing repository data
+### 📈 Git Activity Dashboard
+- Weekly commit breakdown, code changes by file/module, and language trends
+- Auto-generated **Impact Summary Cards** for portfolios and reviews
+- Visual breakdown of contributions beyond raw commit counts
 
-### Useful Commands
+### 🎧 AI Pairing Mode
+- Real-time **text/audio collaboration** between contributors
+- Contextual lookup of relevant files and commit history
+- AI assistant answers repo-specific questions on demand
 
-```bash
-# View logs
-docker-compose logs -f
+## 🧠 Why RepoSensei?
 
-# Stop services
-docker-compose down
+| Challenge                     | RepoSensei Solution                                        |
+|------------------------------|-------------------------------------------------------------|
+| Time-consuming onboarding     | Role-aware walkthroughs, tasks, and repo overviews         |
+| Hard-to-understand structure | Interactive dependency graph + architecture diagram        |
+| Legacy or complex codebases  | Refactor suggestions and debt hotspot analysis             |
+| Low contributor visibility    | Personal dashboards + auto-generated impact summaries      |
+| Copilot lacks context         | Full-repo understanding with task-aware AI assistants      |
 
-# Rebuild and restart
-docker-compose up --build -d
+## 🛠️ Tech Stack
 
-# View running containers
-docker-compose ps
-```
+### 🔧 Backend
+- **Node.js**, **Express.js**
+- **Babel Parser** – for static AST analysis
+- **simple-git**, **ESLint**, **Socket.IO**
 
-## Development
+### 🎨 Frontend
+- **React.js**, **Tailwind CSS**
+- **Cytoscape.js** – for graph visualization
 
-For local development without Docker, see individual service READMEs in their respective directories.
+### 📡 Infrastructure & Realtime
+- **WebRTC** – real-time audio/text pairing
+- **Supabase** – GitHub OAuth + backend auth services
+- **MongoDB**, **Docker** – for scalable local deployment
 
-## 🐳 Running with Docker
+### 🧠 AI Integration
+- **GPT-4o** – repo summarization, quality audits, task generation
+- **GPT-4o Mini** – refactoring and complexity reduction
+- **Gemini Flash** – conversational assistant in Pairing Mode
 
-This project is fully containerized for a seamless, dependency-free setup. All services are orchestrated via Docker Compose, with strict versioning and secure secret management.
+## 📌 Feature Screenshots
 
-### **Project-Specific Docker Requirements**
-- **Node.js Version:** 22.13.1 (for all Node-based services)
-- **Python Version:** 3.11 (for Python backend)
-- **MongoDB:** 7.0 (official image)
-- **Nginx:** Alpine (for frontend static serving)
+### 🖥️ Landing Page
+![Landing](./assets/screenshots/landing.png)
 
-### **Required Environment Variables & Secrets**
-- Each service loads its environment variables from its respective `.env` file (see `env_file` in `docker-compose.yml`).
-- **Secrets** (required for full functionality):
-  - Place the following files in the `secrets/` directory:
-    - `supabase_url.txt`
-    - `supabase_anon_key.txt`
-    - `supabase_service_role_key.txt`
-    - `github_token.txt`
-- Use the provided `setup-secrets.sh` script to generate and configure secrets interactively.
+### 📊 User Activity & Impact Statement
+![Dashboard](./assets/screenshots/dashboard.png)
+![Impact](./assets/screenshots/impact.png)
 
-### **Build & Run Instructions**
-```bash
-# 1. Clone the repository and enter the directory
-# 2. Set up secrets (interactive)
-chmod +x setup-secrets.sh
-./setup-secrets.sh
+### 📂 Onboarding Walkthrough
+![Onboarding](./assets/screenshots/onboard-expanded-tasks.png)
 
-# 3. Build and start all services
-# (Rebuilds images and starts containers)
-docker-compose up --build
-```
+### ✨ Code Quality Audits
+![Audits](./assets/screenshots/code-quality-collapsed.png)
 
-### **Service Ports**
-| Service                              | Port(s)   | Description                |
-|--------------------------------------|-----------|----------------------------|
-| Frontend (React/Vite + Nginx)        | 5173      | User interface             |
-| Backend (Node.js/Express)            | 3000      | API server                 |
-| Python Backend (FastAPI)             | 5005      | AI/ML services             |
-| MongoDB                              | 27017     | Local database             |
-| AI Pair Programming Backend (Node.js) | 3001,3002 | AI pair programming APIs   |
-| AI Pair Programming Frontend (Vite)  | 4173      | AI pair programming UI     |
+### 🛠️ Debt Hotspots & Refactor Suggestions
+![Refactors](./assets/screenshots/hotspots-collapsed-suggestion.png)
 
-### **Special Configuration**
-- **Secrets are injected at runtime**—never baked into images.
-- **Frontend containers** use runtime secret injection to replace placeholders in built JS files.
-- **All containers run as non-root users** for enhanced security.
-- **Persistent MongoDB data** is stored in a Docker volume (`mongodb_data`).
-- **All services are networked via the `appnet` bridge** for secure internal communication.
+### 🕒 Recent Updates Panel
+![Commits](./assets/screenshots/commits-expanded.png)
 
-> **Note:** For local development, no global Node.js, Python, or MongoDB installation is required. All dependencies are managed within containers.
+### 💡 Repository Dependencies Diagram
+![Diagram](./assets/screenshots/diagram.png)
 
----
+### 💬 AI Pairing Chat
+![Pair Start](./assets/screenshots/pair-mode-start.png)
+![Pair Session](./assets/screenshots/pair.png)
+
+
+## 🛡️ Security & Reliability
+
+- **Prompt Sanitization**: Redacts environment variables, secrets, API keys, and internal paths before sending data to any LLM
+- **Validation Pipeline**: AI output cross-checked via ESLint and Git history
+- **Production Tested**: Validated across 5+ real-world public and private repositories
+
+## 🧪 Future Roadmap
+
+- Offline/self-hosted LLM support for enterprise usage
+- Faster AST parsing and parallel static analysis
+- VS Code and JetBrains IDE integration
+- CI/CD pipeline and PR-level quality gate integration
