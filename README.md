@@ -1,4 +1,4 @@
-# 🧠 RepoSensei — AI-Powered Codebase Intelligence
+# RepoSensei — AI-Powered Codebase Intelligence
 
 **RepoSensei** is an AI-powered platform designed to streamline the **understanding**, **maintenance**, and **collaboration** of modern codebases. It accelerates developer onboarding, uncovers hidden technical debt, and empowers teams with real-time insights, role-based walkthroughs, and structured, context-aware task generation — all tailored to how you work.
 
