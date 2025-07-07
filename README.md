@@ -49,6 +49,35 @@
 - Contextual lookup of relevant files and commit history
 - AI assistant answers repo-specific questions on demand
 
+## 📌 Feature Screenshots
+
+### 🖥️ Landing Page
+![Landing](./assets/screenshots/landing.png)
+
+### 📊 User Activity & Impact Statement
+![Dashboard](./assets/screenshots/dashboard.png)
+![Impact](./assets/screenshots/impact.png)
+
+### 📂 Onboarding Walkthrough
+![Onboarding](./assets/screenshots/onboard-expanded-tasks.png)
+
+### ✨ Code Quality Audits
+![Audits](./assets/screenshots/code-quality-collapsed.png)
+
+### 🛠️ Debt Hotspots & Refactor Suggestions
+![Refactors](./assets/screenshots/hotspots-collapsed-suggestion.png)
+
+### 🕒 Recent Updates Panel
+![Commits](./assets/screenshots/commits-expanded.png)
+
+### 💡 Repository Dependencies Diagram
+![Diagram](./assets/screenshots/diagram.png)
+
+### 💬 AI Pairing Chat
+![Pair Start](./assets/screenshots/pair-mode-start.png)
+![Pair Session](./assets/screenshots/pair.png)
+
+
 ## 🧠 Why RepoSensei?
 
 | Challenge                     | RepoSensei Solution                                        |
@@ -80,33 +109,6 @@
 - **GPT-4o Mini** – refactoring and complexity reduction
 - **Gemini Flash** – conversational assistant in Pairing Mode
 
-## 📌 Feature Screenshots
-
-### 🖥️ Landing Page
-![Landing](./assets/screenshots/landing.png)
-
-### 📊 User Activity & Impact Statement
-![Dashboard](./assets/screenshots/dashboard.png)
-![Impact](./assets/screenshots/impact.png)
-
-### 📂 Onboarding Walkthrough
-![Onboarding](./assets/screenshots/onboard-expanded-tasks.png)
-
-### ✨ Code Quality Audits
-![Audits](./assets/screenshots/code-quality-collapsed.png)
-
-### 🛠️ Debt Hotspots & Refactor Suggestions
-![Refactors](./assets/screenshots/hotspots-collapsed-suggestion.png)
-
-### 🕒 Recent Updates Panel
-![Commits](./assets/screenshots/commits-expanded.png)
-
-### 💡 Repository Dependencies Diagram
-![Diagram](./assets/screenshots/diagram.png)
-
-### 💬 AI Pairing Chat
-![Pair Start](./assets/screenshots/pair-mode-start.png)
-![Pair Session](./assets/screenshots/pair.png)
 
 
 ## 🛡️ Security & Reliability
